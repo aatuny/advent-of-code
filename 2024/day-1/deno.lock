@@ -1,0 +1,15 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/streams@0.223.0": "0.223.0",
+    "jsr:@std/streams@1.0.8": "1.0.8"
+  },
+  "jsr": {
+    "@std/streams@0.223.0": {
+      "integrity": "d6b28e498ced3960b04dc5d251f2dcfc1df244b5ec5a48dc23a8f9b490be3b99"
+    },
+    "@std/streams@1.0.8": {
+      "integrity": "b41332d93d2cf6a82fe4ac2153b930adf1a859392931e2a19d9fabfb6f154fb3"
+    }
+  }
+}

@@ -131,3 +131,6 @@ dist
 
 # Advent of code inputs
 input*
+
+# Debug
+debug*
