@@ -46,6 +46,7 @@ pub fn solve_part_2() {
             .split_whitespace()
             .map(|x| x.parse::<i32>().unwrap())
             .collect();
+
         v1.push(line_values[0]);
         v2.push(line_values[1]);
     }
