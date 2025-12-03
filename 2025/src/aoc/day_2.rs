@@ -8,13 +8,13 @@ struct Identifier {
 
 impl Identifier {
     fn new(identifier: String) -> Identifier {
-        let is_valid_1 = Identifier::is_invalid_1(identifier.as_str());
-        let is_valid_2 = Identifier::is_invalid_2(identifier.as_str());
+        let is_invalid_1 = Identifier::is_invalid_1(identifier.as_str());
+        let is_invalid_2 = Identifier::is_invalid_2(identifier.as_str());
 
         Identifier {
             identifier,
-            invalid_1: is_valid_1,
-            invalid_2: is_valid_2,
+            invalid_1: is_invalid_1,
+            invalid_2: is_invalid_2,
         }
     }
 
