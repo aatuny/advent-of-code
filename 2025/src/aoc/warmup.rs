@@ -7,7 +7,7 @@ pub fn solve_warmup() {
     solve_part_2();
 }
 
-pub fn solve_part_1() {
+fn solve_part_1() {
     let data = aoc_utils::read_file_mem("personal-input/2024-12-01.txt");
 
     let mut result = 0;
@@ -34,7 +34,7 @@ pub fn solve_part_1() {
     println!("Warmup part 1 answer is {result}")
 }
 
-pub fn solve_part_2() {
+fn solve_part_2() {
     let data = aoc_utils::read_file_mem("personal-input/2024-12-01.txt");
 
     let mut result = 0;

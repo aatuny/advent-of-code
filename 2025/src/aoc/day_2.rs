@@ -18,7 +18,7 @@ impl Identifier {
         }
     }
 
-    pub fn is_invalid_1(identifier: &str) -> bool {
+    fn is_invalid_1(identifier: &str) -> bool {
         if identifier.len() % 2 != 0 {
             return false;
         }
@@ -28,7 +28,7 @@ impl Identifier {
         first_half.find(second_half).is_some()
     }
 
-    pub fn is_invalid_2(identifier: &str) -> bool {
+    fn is_invalid_2(identifier: &str) -> bool {
         let mut window = String::from("");
 
         for (idx, c) in identifier.chars().enumerate() {
@@ -72,7 +72,7 @@ pub fn solve_day() {
     solve_part_2(data.as_str());
 }
 
-pub fn solve_part_1(data: &str) {
+fn solve_part_1(data: &str) {
     let range_definitions: Vec<&str> = data.trim().split(",").collect();
     let mut result = 0;
 
@@ -95,7 +95,7 @@ pub fn solve_part_1(data: &str) {
     println!("Day 2 part 1 answer is {result}");
 }
 
-pub fn solve_part_2(data: &str) {
+fn solve_part_2(data: &str) {
     let range_definitions: Vec<&str> = data.trim().split(",").collect();
     let mut result = 0;
 
@@ -115,5 +115,5 @@ pub fn solve_part_2(data: &str) {
         result += invalid_identifiers_sum;
     }
 
-    println!("Day 2 part 1 answer is {result}");
+    println!("Day 2 part 2 answer is {result}");
 }

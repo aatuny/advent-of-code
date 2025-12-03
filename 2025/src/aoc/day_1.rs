@@ -6,7 +6,7 @@ pub fn solve_day() {
     solve_part_2(data.as_str());
 }
 
-pub fn solve_part_1(data: &str) {
+fn solve_part_1(data: &str) {
     let mut dial = 50;
     let mut result = 0;
 
@@ -28,7 +28,7 @@ pub fn solve_part_1(data: &str) {
     println!("Day 1 part 1 answer is {result}");
 }
 
-pub fn solve_part_2(data: &str) {
+fn solve_part_2(data: &str) {
     let mut dial = 50;
     let mut result = 0;
 
