@@ -57,8 +57,12 @@ struct Range {
 }
 
 impl Range {
-    fn new(begin: u64, end: u64) -> Range {
-        let identifiers: Vec<Identifier> = (begin..end + 1)
+    fn new(range_definition: &str) -> Range {
+        let range_chunks: Vec<&str> = range_definition.split("-").collect();
+        let range_begin: u64 = range_chunks[0].parse::<u64>().unwrap();
+        let range_end: u64 = range_chunks[1].parse::<u64>().unwrap();
+
+        let identifiers: Vec<Identifier> = (range_begin..range_end + 1)
             .map(|x| Identifier::new(x.to_string()))
             .collect();
 
@@ -77,11 +81,7 @@ fn solve_part_1(data: &str) {
     let mut result = 0;
 
     for range_definition in range_definitions {
-        let range_chunks: Vec<&str> = range_definition.split("-").collect();
-        let range_begin: u64 = range_chunks[0].parse::<u64>().unwrap();
-        let range_end: u64 = range_chunks[1].parse::<u64>().unwrap();
-
-        let range = Range::new(range_begin, range_end);
+        let range = Range::new(range_definition);
         let invalid_identifiers_sum: u64 = range
             .identifiers
             .iter()
@@ -100,11 +100,7 @@ fn solve_part_2(data: &str) {
     let mut result = 0;
 
     for range_definition in range_definitions {
-        let range_chunks: Vec<&str> = range_definition.split("-").collect();
-        let range_begin: u64 = range_chunks[0].parse::<u64>().unwrap();
-        let range_end: u64 = range_chunks[1].parse::<u64>().unwrap();
-
-        let range = Range::new(range_begin, range_end);
+        let range = Range::new(range_definition);
         let invalid_identifiers_sum: u64 = range
             .identifiers
             .iter()
