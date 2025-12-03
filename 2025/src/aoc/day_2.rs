@@ -2,20 +2,23 @@ use crate::aoc_utils;
 
 struct Identifier {
     identifier: String,
-    invalid: bool,
+    invalid_1: bool,
+    invalid_2: bool,
 }
 
 impl Identifier {
     fn new(identifier: String) -> Identifier {
-        let is_valid = Identifier::is_valid(identifier.as_str());
+        let is_valid_1 = Identifier::is_invalid_1(identifier.as_str());
+        let is_valid_2 = Identifier::is_invalid_2(identifier.as_str());
 
         Identifier {
             identifier,
-            invalid: is_valid,
+            invalid_1: is_valid_1,
+            invalid_2: is_valid_2,
         }
     }
 
-    pub fn is_valid(identifier: &str) -> bool {
+    pub fn is_invalid_1(identifier: &str) -> bool {
         if identifier.len() % 2 != 0 {
             return false;
         }
@@ -23,6 +26,29 @@ impl Identifier {
         let first_half = &identifier[..identifier.len() / 2];
         let second_half = &identifier[identifier.len() / 2..];
         first_half.find(second_half).is_some()
+    }
+
+    pub fn is_invalid_2(identifier: &str) -> bool {
+        let mut window = String::from("");
+
+        for (idx, c) in identifier.chars().enumerate() {
+            window.push(c);
+
+            let char_left = identifier.len() - window.len();
+            if window.len() > char_left {
+                return false;
+            }
+
+            let haystack = &identifier[idx + 1..];
+            let split = haystack.split(window.as_str()).collect::<Vec<&str>>();
+            let not_repeated = split.iter().filter(|x| x.len() > 0).count();
+
+            if not_repeated == 0 {
+                return true;
+            }
+        }
+
+        false
     }
 }
 
@@ -42,10 +68,11 @@ impl Range {
 
 pub fn solve_day() {
     let data = aoc_utils::read_file_mem("personal-input/2025-12-02.txt");
-    solve_part_1(data);
+    solve_part_1(data.as_str());
+    solve_part_2(data.as_str());
 }
 
-pub fn solve_part_1(data: String) {
+pub fn solve_part_1(data: &str) {
     let range_definitions: Vec<&str> = data.trim().split(",").collect();
     let mut result = 0;
 
@@ -58,7 +85,30 @@ pub fn solve_part_1(data: String) {
         let invalid_identifiers_sum: u64 = range
             .identifiers
             .iter()
-            .filter(|identifier| identifier.invalid)
+            .filter(|identifier| identifier.invalid_1)
+            .map(|identifier| identifier.identifier.parse::<u64>().unwrap())
+            .sum();
+
+        result += invalid_identifiers_sum;
+    }
+
+    println!("Day 2 part 1 answer is {result}");
+}
+
+pub fn solve_part_2(data: &str) {
+    let range_definitions: Vec<&str> = data.trim().split(",").collect();
+    let mut result = 0;
+
+    for range_definition in range_definitions {
+        let range_chunks: Vec<&str> = range_definition.split("-").collect();
+        let range_begin: u64 = range_chunks[0].parse::<u64>().unwrap();
+        let range_end: u64 = range_chunks[1].parse::<u64>().unwrap();
+
+        let range = Range::new(range_begin, range_end);
+        let invalid_identifiers_sum: u64 = range
+            .identifiers
+            .iter()
+            .filter(|identifier| identifier.invalid_2)
             .map(|identifier| identifier.identifier.parse::<u64>().unwrap())
             .sum();
 
